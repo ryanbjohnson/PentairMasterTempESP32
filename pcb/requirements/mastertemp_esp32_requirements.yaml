@@ -87,39 +87,38 @@ connectors:
       1: 24VAC_IN_1
       2: 24VAC_IN_2
       3: CHASSIS_SHIELD
-  J2_ICM:
+  J2_OPERATING_CONTROL:
+    notes: Manual Rev C Figure 24 operating-control top terminals, left-to-right.
     pins:
-      1: ICM_24VAC_SOURCE
-      2: ICM_GND_REF
-      3: ICM_TH_OUT
-      4: ICM_TH_SENSE_A
-      5: ICM_IND_SENSE_A
-      6: ICM_VAL_SENSE_A
-      7: ICM_SENSE_REF
-  J3_SAFETY_SENSORS:
+      1: ICM_VAL_SENSE_MONITOR_ONLY
+      2: ICM_TH_OUT
+      3: ICM_IND_SENSE
+      4: ICM_GND_REF
+      5: ICM_24VAC_SOURCE
+      6: FIREMAN_24VAC
+      7: FIREMAN_SWITCH_RETURN
+  J3_SAFETY_STACK:
+    notes: Manual Rev C Figure 24 operating-control left safety stack order.
     pins:
-      1: PS_A
-      2: PS_B
-      3: HLS_A
-      4: HLS_B
-      5: ES1_A
-      6: ES1_B
-      7: AFS_A
-      8: AFS_B
-      9: AGS_A
-      10: AGS_B
-      11: SFS_A
-      12: SFS_B
-      13: THERM_A
-      14: THERM_B
-  J4_REMOTE:
+      1: PS
+      2: HLS
+      3: ES1
+      4: AFS
+      5: AGS
+      6: SFS
+      7: GAS_MONITOR_ONLY
+  J4_THERMISTOR:
     pins:
-      1: POOL_REMOTE
-      2: COMMON_REMOTE
-      3: SPA_REMOTE
-      4: FIREMAN_A
-      5: FIREMAN_B
-  J5_UI:
+      1: THERM_A
+      2: THERM_B
+  J5_EXTERNAL_CONTROL:
+    notes: Manual Rev C Figure 24 three-wire external control interface.
+    pins:
+      1: SPA_LINE
+      2: COMMON_LINE
+      3: POOL_LINE
+  J6_MEMBRANE_UI:
+    notes: Manual Rev C Figure 24 J6 membrane-pad connector, pin count and final mapping still to verify from installed harness.
     pins:
       1: BTN_POOL
       2: BTN_SPA

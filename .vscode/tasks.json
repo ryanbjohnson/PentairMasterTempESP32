@@ -2,6 +2,22 @@
   "version": "2.0.0",
   "tasks": [
     {
+      "label": "Project: Run Tests",
+      "type": "shell",
+      "command": "bash ./scripts/run-tests.sh",
+      "windows": {
+        "command": "powershell",
+        "args": [
+          "-NoProfile",
+          "-ExecutionPolicy",
+          "Bypass",
+          "-Command",
+          "python -m unittest discover -s tests -v"
+        ]
+      },
+      "problemMatcher": []
+    },
+    {
       "label": "KiCad: Check CLI",
       "type": "shell",
       "command": "kicad-cli version",

@@ -3,12 +3,17 @@
   "build": {
     "dockerfile": "Dockerfile"
   },
+  "mounts": [
+    "source=pentair-chatgpt-storage,target=/home/vscode/.vscode-server/data/User/globalStorage/openai.chatgpt,type=volume",
+    "source=pentair-codex-home,target=/home/vscode/.codex,type=volume"
+  ],
   "customizations": {
     "vscode": {
       "extensions": [
         "redhat.vscode-yaml",
         "ms-vscode.powershell",
-        "streetsidesoftware.code-spell-checker"
+        "streetsidesoftware.code-spell-checker",
+        "openai.chatgpt"
       ],
       "settings": {
         "files.associations": {
