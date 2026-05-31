@@ -1,0 +1,22 @@
+(kicad_sch
+  (version 20230121)
+  (generator "codex")
+  (uuid "5d739fb5-9f90-4af0-b278-070e6f59d451")
+  (paper "A3")
+  (title_block
+    (title "Remote Controls, Local UI, Display, Status Outputs")
+    (date "2026-05-31")
+    (rev "scaffold-0")
+    (company "Preliminary - not certified")
+    (comment 1 "Pool/Common/Spa remote inputs are dry-contact sensing only.")
+  )
+  (lib_symbols)
+  (text "TODO: Pool/Common/Spa dry-contact inputs, local buttons, OLED/I2C, buzzer, status LEDs."
+    (at 25.4 25.4 0)
+    (effects (font (size 1.5 1.5)) (justify left bottom))
+    (uuid "e10db230-775d-4d94-85d7-e9c64e8a17aa")
+  )
+  (sheet_instances
+    (path "/ba55cf46-9fdf-4a3a-aad6-4553ca5d6c42" (page "7"))
+  )
+)

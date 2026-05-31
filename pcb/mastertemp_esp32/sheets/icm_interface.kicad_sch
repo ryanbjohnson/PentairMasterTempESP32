@@ -1,0 +1,27 @@
+(kicad_sch
+  (version 20230121)
+  (generator "codex")
+  (uuid "5d5a72f7-f205-48f0-8e7e-04b0f1ba8d0b")
+  (paper "A3")
+  (title_block
+    (title "Ignition Control Module Interface")
+    (date "2026-05-31")
+    (rev "scaffold-0")
+    (company "Preliminary - not certified")
+    (comment 1 "TH heat request only. VAL, IND, TH, and 24 VAC are monitor/sense points as defined.")
+  )
+  (lib_symbols)
+  (text "TODO: J2, dual series NO relays for TH, opto-isolated TH/IND/VAL/24VAC sense, relay feedback."
+    (at 25.4 25.4 0)
+    (effects (font (size 1.5 1.5)) (justify left bottom))
+    (uuid "fe49883d-82bd-4fa6-b1b3-c25fb74e706b")
+  )
+  (text "NO GAS VALVE DRIVE OUTPUT ON THIS SHEET."
+    (at 25.4 35.56 0)
+    (effects (font (size 2.0 2.0) (bold yes)) (justify left bottom))
+    (uuid "8bb6349d-24d5-469a-b827-8dceff77562a")
+  )
+  (sheet_instances
+    (path "/d40ab944-a9c4-4f0d-b4ad-cec6f74071d9" (page "4"))
+  )
+)

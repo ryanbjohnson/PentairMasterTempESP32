@@ -1,0 +1,27 @@
+(kicad_sch
+  (version 20230121)
+  (generator "codex")
+  (uuid "ce91ff53-7e38-4691-8a7d-b42b3c87ccfc")
+  (paper "A3")
+  (title_block
+    (title "Safety Inputs and Static Heat-Enable Chain")
+    (date "2026-05-31")
+    (rev "scaffold-0")
+    (company "Preliminary - not certified")
+    (comment 1 "Safety switches are sensed and participate in hardware gating where appropriate.")
+  )
+  (lib_symbols)
+  (text "TODO: PS, HLS, ES1, AFS, AGS, Fireman's Switch, opto dry-contact sense, static safety gate."
+    (at 25.4 25.4 0)
+    (effects (font (size 1.5 1.5)) (justify left bottom))
+    (uuid "ca1c816b-36e3-4d13-8bc7-6905e7939018")
+  )
+  (text "AFS is a dynamic airflow proving input: verify idle/open and run/proved behavior."
+    (at 25.4 35.56 0)
+    (effects (font (size 1.5 1.5)) (justify left bottom))
+    (uuid "a11f8271-a208-462b-a02d-e62ecb0f6682")
+  )
+  (sheet_instances
+    (path "/82ec6d80-25f4-4b98-986b-98eab22f32ad" (page "5"))
+  )
+)

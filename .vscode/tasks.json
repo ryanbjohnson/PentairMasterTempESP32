@@ -1,0 +1,69 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "KiCad: Check CLI",
+      "type": "shell",
+      "command": "kicad-cli version",
+      "windows": {
+        "command": "powershell",
+        "args": [
+          "-NoProfile",
+          "-ExecutionPolicy",
+          "Bypass",
+          "-Command",
+          "if (Get-Command kicad-cli -ErrorAction SilentlyContinue) { kicad-cli version } else { Write-Error 'kicad-cli not found on PATH. Install KiCad or use the dev container.' }"
+        ]
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "KiCad: ERC + DRC",
+      "type": "shell",
+      "command": "bash ./scripts/kicad-check.sh",
+      "windows": {
+        "command": "powershell",
+        "args": [
+          "-NoProfile",
+          "-ExecutionPolicy",
+          "Bypass",
+          "-File",
+          "scripts/kicad-check.ps1"
+        ]
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "KiCad: Export Fab Outputs",
+      "type": "shell",
+      "command": "bash ./scripts/kicad-export.sh",
+      "windows": {
+        "command": "powershell",
+        "args": [
+          "-NoProfile",
+          "-ExecutionPolicy",
+          "Bypass",
+          "-File",
+          "scripts/kicad-export.ps1"
+        ]
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "KiCad: Open Project",
+      "type": "shell",
+      "command": "kicad pcb/mastertemp_esp32/mastertemp_esp32.kicad_pro",
+      "windows": {
+        "command": "powershell",
+        "args": [
+          "-NoProfile",
+          "-ExecutionPolicy",
+          "Bypass",
+          "-File",
+          "scripts/open-kicad-project.ps1"
+        ]
+      },
+      "problemMatcher": []
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+(kicad_sch
+  (version 20230121)
+  (generator "codex")
+  (uuid "8cdd9f60-81e9-43be-9240-72fa5520c45c")
+  (paper "A3")
+  (title_block
+    (title "ESP32, Watchdog, Reset, Relay Enable Gates")
+    (date "2026-05-31")
+    (rev "scaffold-0")
+    (company "Preliminary - not certified")
+    (comment 1 "Relay command pins must default off during reset, bootloader, brownout, OTA, and crash.")
+  )
+  (lib_symbols)
+  (text "TODO: ESP32-WROOM, watchdog, reset supervisor, programming header, I2C, relay-enable logic."
+    (at 25.4 25.4 0)
+    (effects (font (size 1.5 1.5)) (justify left bottom))
+    (uuid "88965958-3261-4d15-9972-3a73723f6d7c")
+  )
+  (sheet_instances
+    (path "/55f88e14-a963-4749-b9bf-a5d12f0d95cb" (page "3"))
+  )
+)

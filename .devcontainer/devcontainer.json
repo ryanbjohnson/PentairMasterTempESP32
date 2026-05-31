@@ -1,0 +1,25 @@
+{
+  "name": "Pentair KiCad PCB",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "redhat.vscode-yaml",
+        "ms-vscode.powershell",
+        "streetsidesoftware.code-spell-checker"
+      ],
+      "settings": {
+        "files.associations": {
+          "*.kicad_sch": "scheme",
+          "*.kicad_pcb": "scheme",
+          "*.kicad_sym": "scheme",
+          "*.kicad_mod": "scheme"
+        }
+      }
+    }
+  },
+  "postCreateCommand": "kicad-cli version || true",
+  "remoteUser": "vscode"
+}

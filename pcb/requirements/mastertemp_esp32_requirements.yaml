@@ -1,0 +1,151 @@
+project:
+  name: mastertemp_esp32
+  description: ESP32 interface board scaffold for Pentair MasterTemp 125 operating-control replacement/interposer.
+  status: preliminary_not_certified
+  source_design_doc: ../../MasterTemp_ESP32_Interface_Preliminary_Design.md
+
+safety_boundary:
+  classification: operating_control_interface_only
+  preserve_oem_ignition_control_module: true
+  direct_gas_valve_drive_allowed: false
+  line_voltage_on_pcb_allowed: false
+  heat_request_output:
+    signal: ICM_TH_OUT
+    method: isolated_series_normally_open_relay_contacts
+    relay_count: 2
+    fail_safe_state: open
+  must_open_heat_request_on:
+    - esp32_not_booted
+    - esp32_watchdog_timeout
+    - firmware_crash
+    - three_v3_brownout
+    - five_v_fault
+    - invalid_thermistor
+    - invalid_sfs
+    - overtemperature
+    - static_safety_open
+    - fireman_switch_open
+    - pool_spa_conflict
+    - relay_feedback_fault
+    - ota_in_progress
+
+kicad:
+  project_file: ../mastertemp_esp32/mastertemp_esp32.kicad_pro
+  root_schematic: ../mastertemp_esp32/mastertemp_esp32.kicad_sch
+  board_file: ../mastertemp_esp32/mastertemp_esp32.kicad_pcb
+  preferred_board_stackup:
+    layers: 4
+    copper:
+      - F.Cu_signal
+      - In1.Cu_ground
+      - In2.Cu_power
+      - B.Cu_signal
+
+hierarchical_sheets:
+  - file: sheets/power_24vac.kicad_sch
+    purpose: 24 VAC protection, bridge, VRAW, 5 V buck, 3.3 V regulator, brownout.
+  - file: sheets/esp32_supervisor.kicad_sch
+    purpose: ESP32 module, programming header, watchdog, reset supervisor, relay-enable gates.
+  - file: sheets/safety_inputs.kicad_sch
+    purpose: PS, HLS, ES1, AFS, AGS, Fireman's Switch, isolated sense, static safety chain.
+  - file: sheets/thermistor_sfs.kicad_sch
+    purpose: Water thermistor, stack flue sensor, ADC, hardware window comparators.
+  - file: sheets/icm_interface.kicad_sch
+    purpose: TH relay output, TH/IND/VAL/24VAC isolated monitoring, relay feedback.
+  - file: sheets/ui_remote.kicad_sch
+    purpose: Pool/Spa/Common remote dry contacts, local buttons, display, LEDs, buzzer.
+
+net_classes:
+  - name: DEFAULT
+    clearance_mm: 0.20
+    track_width_mm: 0.25
+    notes: General low-voltage logic after review.
+  - name: CONTROL_24VAC
+    clearance_mm: 1.00
+    track_width_mm: 0.50
+    notes: 24 VAC control wiring and opto input field side.
+  - name: RELAY_CONTACT_24VAC
+    clearance_mm: 1.50
+    track_width_mm: 1.00
+    notes: Dual relay contact path for ICM TH heat request only.
+  - name: VRAW_RECTIFIED
+    clearance_mm: 0.80
+    track_width_mm: 0.75
+    notes: Rectified transformer rail, design for unloaded transformer transients.
+  - name: SENSOR_ADC
+    clearance_mm: 0.30
+    track_width_mm: 0.20
+    notes: Thermistor/SFS low-noise analog routing, away from buck and relays.
+  - name: WIFI_ANTENNA_KEEPOUT
+    clearance_mm: 0.00
+    track_width_mm: 0.00
+    notes: Region/constraint, not a routed net class.
+
+connectors:
+  J1_POWER:
+    pins:
+      1: 24VAC_IN_1
+      2: 24VAC_IN_2
+      3: CHASSIS_SHIELD
+  J2_ICM:
+    pins:
+      1: ICM_24VAC_SOURCE
+      2: ICM_GND_REF
+      3: ICM_TH_OUT
+      4: ICM_TH_SENSE_A
+      5: ICM_IND_SENSE_A
+      6: ICM_VAL_SENSE_A
+      7: ICM_SENSE_REF
+  J3_SAFETY_SENSORS:
+    pins:
+      1: PS_A
+      2: PS_B
+      3: HLS_A
+      4: HLS_B
+      5: ES1_A
+      6: ES1_B
+      7: AFS_A
+      8: AFS_B
+      9: AGS_A
+      10: AGS_B
+      11: SFS_A
+      12: SFS_B
+      13: THERM_A
+      14: THERM_B
+  J4_REMOTE:
+    pins:
+      1: POOL_REMOTE
+      2: COMMON_REMOTE
+      3: SPA_REMOTE
+      4: FIREMAN_A
+      5: FIREMAN_B
+  J5_UI:
+    pins:
+      1: BTN_POOL
+      2: BTN_SPA
+      3: BTN_OFF
+      4: BTN_UP
+      5: BTN_DOWN
+      6: BTN_RESET
+      7: UI_GND
+      8: DISPLAY_SDA
+      9: DISPLAY_SCL
+      10: +3V3_UI
+      11: BUZZER
+      12: STATUS_LED_DATA
+
+review_gates:
+  before_schematic_capture:
+    - confirm_exact_heater_revision_and_harness_pinout
+    - confirm_transformer_secondary_voltage_no_load_and_loaded
+    - confirm_thermistor_curve_and_sfs_electrical_type
+    - decide_replacement_pcba_vs_interposer
+  before_layout_release:
+    - complete_erc_zero_unreviewed_errors
+    - complete_fmea
+    - verify_relay_contact_strategy_with_certification_path
+    - verify_creepage_clearance_and_miswire_tolerance
+  before_heater_connection:
+    - bench_test_with_isolated_24vac_transformer
+    - verify_heat_request_opens_on_all_faults
+    - qualified_technician_review

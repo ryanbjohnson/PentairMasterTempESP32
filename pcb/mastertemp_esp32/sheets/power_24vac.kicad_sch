@@ -1,0 +1,22 @@
+(kicad_sch
+  (version 20230121)
+  (generator "codex")
+  (uuid "d95155fb-17f6-4a5e-a236-9f84f4e01d54")
+  (paper "A3")
+  (title_block
+    (title "Power: 24 VAC Input, Protection, 5 V, 3.3 V")
+    (date "2026-05-31")
+    (rev "scaffold-0")
+    (company "Preliminary - not certified")
+    (comment 1 "Design VRAW for nominal 24 VAC and unloaded transformer margin.")
+  )
+  (lib_symbols)
+  (text "TODO: J1, fuse/PTC, MOV/TVS, bridge, VRAW bulk, 5 V buck, 3.3 V regulator, brownout supervisor."
+    (at 25.4 25.4 0)
+    (effects (font (size 1.5 1.5)) (justify left bottom))
+    (uuid "0e3d66a4-6276-49a6-8544-a14e78d23480")
+  )
+  (sheet_instances
+    (path "/f096cf09-71a8-49e5-bb12-94a1d813a4d5" (page "2"))
+  )
+)

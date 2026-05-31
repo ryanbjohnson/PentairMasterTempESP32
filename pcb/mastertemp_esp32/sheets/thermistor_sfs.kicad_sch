@@ -1,0 +1,22 @@
+(kicad_sch
+  (version 20230121)
+  (generator "codex")
+  (uuid "c7f98fe7-9b48-4596-875b-f586a0e88b31")
+  (paper "A3")
+  (title_block
+    (title "Thermistor, Stack Flue Sensor, ADC, Window Comparators")
+    (date "2026-05-31")
+    (rev "scaffold-0")
+    (company "Preliminary - not certified")
+    (comment 1 "Thermistor and SFS validity must disable heat through hardware gates and firmware.")
+  )
+  (lib_symbols)
+  (text "TODO: thermistor divider, SFS excitation/buffer, ADS1115, hardware window comparators, ESD protection."
+    (at 25.4 25.4 0)
+    (effects (font (size 1.5 1.5)) (justify left bottom))
+    (uuid "5af94fb4-ea76-4f57-b29f-b9b361697d47")
+  )
+  (sheet_instances
+    (path "/51fbd8cc-2c9f-435a-997a-9d762d7a1ff4" (page "6"))
+  )
+)

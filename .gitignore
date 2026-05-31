@@ -1,0 +1,16 @@
+# KiCad generated/local files
+**/*-backups/
+**/*.kicad_sch-bak
+**/*.kicad_pcb-bak
+**/*.kicad_prl
+**/*.lck
+**/*.bak
+**/*.tmp
+
+# Build/check outputs
+reports/
+fab/
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
