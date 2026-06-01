@@ -1,0 +1,22 @@
+name: Documentation
+description: Request or propose documentation improvements.
+title: "[docs] "
+labels: ["documentation", "triage"]
+body:
+  - type: textarea
+    id: doc
+    attributes:
+      label: Documentation Issue
+    validations:
+      required: true
+  - type: textarea
+    id: proposed
+    attributes:
+      label: Proposed Improvement
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Safety Check
+      options:
+        - label: This does not weaken or obscure the project safety boundary.
+          required: true

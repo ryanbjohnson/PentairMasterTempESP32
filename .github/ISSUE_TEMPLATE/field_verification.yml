@@ -1,0 +1,42 @@
+name: Field verification
+description: Record or request installed-heater evidence needed before release.
+title: "[field] "
+labels: ["field-verification", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: "Only qualified people should collect live measurements. Remove serial numbers, addresses, and private information before posting images."
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      options:
+        - Heater identity
+        - Harness and connector verification
+        - Electrical measurement
+        - Sensor characterization
+        - Mechanical/enclosure input
+        - Certification/review path
+    validations:
+      required: true
+  - type: textarea
+    id: data
+    attributes:
+      label: Data Or Request
+      description: What was measured, photographed, or still needs verification?
+    validations:
+      required: true
+  - type: textarea
+    id: conditions
+    attributes:
+      label: Conditions
+      description: Meter model, heater state, temperature, model/revision, and any relevant safety context.
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Privacy And Safety
+      options:
+        - label: Private identifying information has been removed.
+          required: true
+        - label: This does not instruct unqualified people to work on a live heater.
+          required: true

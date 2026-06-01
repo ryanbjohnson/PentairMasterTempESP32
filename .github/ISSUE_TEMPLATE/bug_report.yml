@@ -1,0 +1,40 @@
+name: Bug report
+description: Report a repository, script, KiCad, or documentation bug.
+title: "[bug] "
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: "Do not include unsafe live-heater test steps or safety-bypass details in public issues."
+  - type: textarea
+    id: description
+    attributes:
+      label: Problem
+      description: What is wrong?
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Reproduction Steps
+      description: Commands, KiCad actions, or files involved.
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Result
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual Result
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      placeholder: KiCad version, OS, dev container or native
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Safety Check
+      options:
+        - label: This report does not include public instructions for bypassing heater safety systems.
+          required: true

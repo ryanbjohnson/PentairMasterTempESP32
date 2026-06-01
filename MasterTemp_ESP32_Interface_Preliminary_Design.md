@@ -27,6 +27,7 @@ Manufacturer facts used for this design:
 Sources:
 
 - Pentair MasterTemp 125 Installation and User's Guide, Rev. C: https://www.pentair.com/content/dam/extranet/aquatics/pool-pad-pro-assets/heaters-%26-heat-pumps/inground-heaters/mastertemp-125-heater/MasterTemp%20125%20Installation%20and%20Users%20Guide%20-%20English%20-%20Rev%20C.pdf
+  - Local checked-in copy: `pcb/mastertemp_esp32/references/manuals/mastertemp_125_installation_users_guide_english_rev_c.pdf`
 - Pentair MasterTemp/Max-E-Therm connected-heater parts matrix: https://www.pentair.com/content/dam/extranet/nam/pentair-pool/residential/parts-sheets/heaters/mastertemp-max-e-therm-parts-matrix-connected-heater-update-v1.pdf
 - Pentair electrical-system replacement parts sheet showing 42002-0007S and factory sensors: https://www.pentair.com/content/dam/extranet/nam/pentair-pool/residential/parts-sheets/heaters/MaxETherm_Heater_Electrical_System.pdf
 

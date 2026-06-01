@@ -1,0 +1,44 @@
+name: Schematic task
+description: Propose or track a schematic capture/change task.
+title: "[schematic] "
+labels: ["schematic", "triage"]
+body:
+  - type: dropdown
+    id: sheet
+    attributes:
+      label: Sheet
+      options:
+        - power_24vac
+        - icm_interface
+        - esp32_supervisor
+        - safety_inputs
+        - thermistor_sfs
+        - ui_remote
+        - root schematic
+        - other
+    validations:
+      required: true
+  - type: textarea
+    id: change
+    attributes:
+      label: Proposed Change
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence Or Source
+      description: Manual section, datasheet, field measurement, photo, or design doc.
+  - type: checkboxes
+    id: boundary
+    attributes:
+      label: Safety Boundary
+      options:
+        - label: Does not add direct gas-valve drive.
+          required: true
+        - label: Does not add line-voltage routing.
+          required: true
+        - label: Preserves OEM ignition-control sequencing.
+          required: true
+        - label: Documents unresolved assumptions.
+          required: true

@@ -1,6 +1,6 @@
 # MasterTemp 125 Rev C Manual Review
 
-Source file: `../../../MasterTemp 125 Installation and Users Guide - English - Rev C.pdf`
+Source file: `../references/manuals/mastertemp_125_installation_users_guide_english_rev_c.pdf`
 
 PDF metadata:
 

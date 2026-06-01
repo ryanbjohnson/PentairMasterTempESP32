@@ -1,0 +1,33 @@
+name: PCB layout task
+description: Propose or track placement, routing, DRC, or parity work.
+title: "[layout] "
+labels: ["pcb", "layout", "triage"]
+body:
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope
+      description: Placement, routing, DRC, parity, footprint, keepout, or manufacturing issue.
+    validations:
+      required: true
+  - type: textarea
+    id: constraints
+    attributes:
+      label: Constraints
+      description: Isolation, antenna keepout, field wiring, analog quiet zone, service clearance, or safety notes.
+  - type: textarea
+    id: reports
+    attributes:
+      label: Relevant Reports
+      description: Paste concise output from reports or commands.
+  - type: checkboxes
+    id: boundary
+    attributes:
+      label: Safety Boundary
+      options:
+        - label: Keeps relay contact and 24 VAC control paths visibly separated from logic.
+          required: true
+        - label: Keeps ESP32 antenna keepout intact if ESP32 placement is affected.
+          required: true
+        - label: Does not route line voltage.
+          required: true

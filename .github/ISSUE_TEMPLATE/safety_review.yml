@@ -1,0 +1,30 @@
+name: Safety review
+description: Track a safety-critical question or design review.
+title: "[safety] "
+labels: ["safety-review", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: "If this discloses an unsafe bypass path, use private vulnerability reporting instead of a public issue."
+  - type: textarea
+    id: question
+    attributes:
+      label: Review Question
+    validations:
+      required: true
+  - type: textarea
+    id: affected
+    attributes:
+      label: Affected Files Or Functions
+  - type: textarea
+    id: hazard
+    attributes:
+      label: Hazard Or Failure Mode
+      description: What could go wrong if this is misunderstood or implemented incorrectly?
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence
+      description: Manual references, standards, field data, FMEA notes, or datasheets.

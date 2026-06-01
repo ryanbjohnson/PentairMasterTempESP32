@@ -1,2 +1,5 @@
-# Auto detect text files and perform LF normalization
-* text=auto
+# Auto detect text files and keep repository text files portable.
+* text=auto eol=lf
+
+*.ps1 text eol=crlf
+*.pdf binary

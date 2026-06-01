@@ -7,6 +7,10 @@ The current files are a scaffold, not a completed schematic or board layout. The
 - `../../MasterTemp_ESP32_Interface_Preliminary_Design.md`
 - `../requirements/mastertemp_esp32_requirements.yaml`
 
+Installed-heater inputs required before electrical release are tracked in `docs/field_input_verification.md`.
+
+The original Pentair board photo reference is tracked in `docs/oem_board_photo_layout_notes.md`; save the image itself as `references/images/original_pentair_control_board_front.jpg` when exporting the chat/IDE attachment.
+
 ## Recommended workflow
 
 1. Open `mastertemp_esp32.kicad_pro` in KiCad.
@@ -31,6 +35,7 @@ The current files are a scaffold, not a completed schematic or board layout. The
 - `libraries/`: project-local symbols and footprints.
 - `rules/`: layout constraints and DRC notes.
 - `docs/`: design workflow notes, pin maps, and review records.
+- `references/`: project-local manuals, source documents, and non-release visual references.
 
 ## Completion checklist
 
@@ -52,6 +57,7 @@ Use this as the live gate list for moving from scaffold to a reviewable PCB pack
 ### Inputs to close before electrical release
 
 - [ ] Exact MasterTemp 125 model revision, serial/date range, and connected/non-connected variant are recorded.
+- [ ] Field input verification record is complete and reviewed in `docs/field_input_verification.md`.
 - [x] Rev C manual connector groups are reflected in draft requirements and floorplan.
 - [ ] Heater harness pinout is verified from the installed unit and matching manual revision.
 - [ ] 24 VAC transformer no-load and loaded voltages are measured.
