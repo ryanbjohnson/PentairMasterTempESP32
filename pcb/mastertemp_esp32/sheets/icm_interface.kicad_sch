@@ -11,15 +11,40 @@
     (comment 1 "TH heat request only. VAL, IND, TH, and 24 VAC are monitor/sense points as defined.")
   )
   (lib_symbols)
-  (text "TODO: J2, dual series NO relays for TH, opto-isolated TH/IND/VAL/24VAC sense, relay feedback."
+  (text "SCHEMATIC PASS 1 - CONTROL BOARD INTERFACE FROM MASTERTEMP 125 REV C FIGURE 24/25"
     (at 25.4 25.4 0)
-    (effects (font (size 1.5 1.5)) (justify left bottom))
+    (effects (font (size 1.8 1.8) (bold yes)) (justify left bottom))
     (uuid "fe49883d-82bd-4fa6-b1b3-c25fb74e706b")
   )
   (text "NO GAS VALVE DRIVE OUTPUT ON THIS SHEET."
     (at 25.4 35.56 0)
     (effects (font (size 2.0 2.0) (bold yes)) (justify left bottom))
     (uuid "8bb6349d-24d5-469a-b827-8dceff77562a")
+  )
+  (text "J2 OPERATING CONTROL TERMINALS, MANUAL ORDER:\n1 VAL_SENSE_MONITOR_ONLY\n2 TH_HEAT_REQUEST_OUT\n3 IND_SENSE\n4 ICM_GND_REF\n5 ICM_24VAC_SOURCE\n6 FIREMAN_24VAC\n7 FIREMAN_SWITCH_RETURN"
+    (at 25.4 50.8 0)
+    (effects (font (size 1.35 1.35)) (justify left top))
+    (uuid "b71738fa-01f3-4b16-9d2f-fdb0cd4f17d0")
+  )
+  (text "HEAT REQUEST CONTACT PATH:\nICM_24VAC_SOURCE -> K1_COM -> K1_NO -> K2_COM -> K2_NO -> TH_HEAT_REQUEST_OUT.\nK1 and K2 are normally-open relay contacts in series. Loss of board power opens the path."
+    (at 95.25 50.8 0)
+    (effects (font (size 1.35 1.35)) (justify left top))
+    (uuid "f4e44911-e292-4a68-9e36-0533eabf2b79")
+  )
+  (text "RELAY COIL GATING:\nK1 coil enable = HEAT_CMD plus WATCHDOG_OK plus BROWNOUT_OK.\nK2 coil enable = HEAT_CMD plus SAFETY_STATIC_OK plus NOT_OTA plus NOT_FAULT_LOCKOUT.\nEvery relay-driver gate needs a pulldown so reset/boot/crash keeps heat off."
+    (at 95.25 82.55 0)
+    (effects (font (size 1.35 1.35)) (justify left top))
+    (uuid "a62b74ab-86c2-4f39-ae30-066eafad5d52")
+  )
+  (text "SENSE-ONLY CHANNELS:\nVAL, IND, TH feedback, and 24VAC presence are isolated AC optocoupler inputs.\nVAL and GAS are diagnostic monitor inputs only; they must never be sourced or driven by this board."
+    (at 25.4 101.6 0)
+    (effects (font (size 1.35 1.35)) (justify left top))
+    (uuid "0eb43668-3883-4398-b557-f9f6eae1dc8b")
+  )
+  (text "ICM TERMINAL REFERENCE FROM MANUAL FIGURE 24/25:\nS1/240, S1/120, L1, L2, S2, TH, IND, VAL, GND are on the OEM ignition-control module.\nThis project preserves the OEM ICM and does not replace ignition, blower, HSI, or gas-valve sequencing."
+    (at 25.4 127.0 0)
+    (effects (font (size 1.35 1.35)) (justify left top))
+    (uuid "862dc7e0-99c0-4dcd-8452-e7ffda368d2a")
   )
   (sheet_instances
     (path "/d40ab944-a9c4-4f0d-b4ad-cec6f74071d9" (page "4"))

@@ -11,6 +11,13 @@
 reports/
 fab/
 
+# Python/cache noise
+__pycache__/
+*.py[cod]
+
+# KiCad local history
+**/.history/
+
 # OS/editor noise
 .DS_Store
 Thumbs.db

@@ -11,15 +11,40 @@
     (comment 1 "Safety switches are sensed and participate in hardware gating where appropriate.")
   )
   (lib_symbols)
-  (text "TODO: PS, HLS, ES1, AFS, AGS, Fireman's Switch, opto dry-contact sense, static safety gate."
+  (text "SCHEMATIC PASS 1 - CONTROL BOARD SAFETY STACK FROM MASTERTEMP 125 REV C FIGURE 24"
     (at 25.4 25.4 0)
-    (effects (font (size 1.5 1.5)) (justify left bottom))
+    (effects (font (size 1.8 1.8) (bold yes)) (justify left bottom))
     (uuid "ca1c816b-36e3-4d13-8bc7-6905e7939018")
   )
   (text "AFS is a dynamic airflow proving input: verify idle/open and run/proved behavior."
     (at 25.4 35.56 0)
     (effects (font (size 1.5 1.5)) (justify left bottom))
     (uuid "a11f8271-a208-462b-a02d-e62ecb0f6682")
+  )
+  (text "J3 SAFETY STACK TERMINALS, MANUAL ORDER:\n1 PS - water pressure switch\n2 HLS - high limit switch\n3 ES1 - extra switch / jumper position\n4 AFS - air-flow proving switch, dynamic only\n5 AGS - automatic gas shutoff switch\n6 SFS - stack flue sensor/fault input group\n7 GAS - gas-valve-related monitor only"
+    (at 25.4 50.8 0)
+    (effects (font (size 1.35 1.35)) (justify left top))
+    (uuid "e8f4641f-7054-4451-8e0e-6864ec08da26")
+  )
+  (text "STATIC HEAT ENABLE CHAIN:\nFIREMAN_CLOSED -> PS_CLOSED -> HLS_CLOSED -> AGS_CLOSED -> ES1_CLOSED_OR_JUMPERED -> THERMISTOR_RANGE_OK -> SFS_RANGE_OK -> SAFETY_STATIC_OK.\nSAFETY_STATIC_OK gates K2 independently of Wi-Fi, MQTT, Home Assistant, OTA, and normal firmware requests."
+    (at 25.4 88.9 0)
+    (effects (font (size 1.35 1.35)) (justify left top))
+    (uuid "8423448a-4e0c-4b0a-86a7-214d4b8b34df")
+  )
+  (text "AFS DYNAMIC POLICY:\nAFS must be monitored for sane idle/open and run/proved behavior after blower/IND activity.\nDo not require AFS closed before the heat request. If AFS opens while firing, drop TH immediately and fault."
+    (at 25.4 120.65 0)
+    (effects (font (size 1.35 1.35)) (justify left top))
+    (uuid "0ce83133-7125-4bd8-93c3-e062247b437f")
+  )
+  (text "DRY-CONTACT SENSE CHANNELS:\nUse isolated wetting current and optocoupler inputs for contact diagnostics where practical.\nFirmware may report which safety opened, but firmware must not bypass an open safety."
+    (at 114.3 50.8 0)
+    (effects (font (size 1.35 1.35)) (justify left top))
+    (uuid "f85ab352-d105-458f-83ff-aa47f2ac949f")
+  )
+  (text "FIREMAN'S SWITCH:\nManual page 29 specifies the Fireman's Switch/timer completes the heater 24 VAC control-board circuit.\nExternal relay/contact rating target: 24 VAC at 0.5 A. Do not apply line voltage."
+    (at 114.3 82.55 0)
+    (effects (font (size 1.35 1.35)) (justify left top))
+    (uuid "d0f2888b-b2f0-41c4-aea1-1a2e67290873")
   )
   (sheet_instances
     (path "/82ec6d80-25f4-4b98-986b-98eab22f32ad" (page "5"))

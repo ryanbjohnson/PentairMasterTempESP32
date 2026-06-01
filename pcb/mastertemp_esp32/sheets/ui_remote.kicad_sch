@@ -4,17 +4,37 @@
   (uuid "5d739fb5-9f90-4af0-b278-070e6f59d451")
   (paper "A3")
   (title_block
-    (title "Remote Controls, Local UI, Display, Status Outputs")
+    (title "External Control Interface - Keypad Out of Scope")
     (date "2026-05-31")
     (rev "scaffold-0")
     (company "Preliminary - not certified")
-    (comment 1 "Pool/Common/Spa remote inputs are dry-contact sensing only.")
+    (comment 1 "Pool/Common/Spa remote inputs are dry-contact sensing only. No keypad/display design.")
   )
   (lib_symbols)
-  (text "TODO: Pool/Common/Spa dry-contact inputs, local buttons, OLED/I2C, buzzer, status LEDs."
+  (text "SCHEMATIC PASS 1 - EXTERNAL CONTROL ONLY"
     (at 25.4 25.4 0)
-    (effects (font (size 1.5 1.5)) (justify left bottom))
+    (effects (font (size 1.8 1.8) (bold yes)) (justify left bottom))
     (uuid "e10db230-775d-4d94-85d7-e9c64e8a17aa")
+  )
+  (text "KEYPAD / MEMBRANE PAD / DISPLAY / BUZZER / STATUS LED DESIGN IS OUT OF SCOPE.\nThis sheet only captures the control-board external control interface needed to request Pool, Spa, or Off behavior."
+    (at 25.4 38.1 0)
+    (effects (font (size 1.5 1.5) (bold yes)) (justify left top))
+    (uuid "1ee4bde6-5377-4ceb-a1aa-5e64bcd8b69f")
+  )
+  (text "J5 EXTERNAL CONTROL INTERFACE FROM MANUAL FIGURE 24:\n1 SPA_LINE\n2 COMMON_LINE\n3 POOL_LINE\nUse isolated dry-contact sensing. If Pool and Spa are both asserted, fault and keep heat off."
+    (at 25.4 69.85 0)
+    (effects (font (size 1.35 1.35)) (justify left top))
+    (uuid "2087c013-f33b-487a-bb2a-aa55d338e814")
+  )
+  (text "J6 OEM MEMBRANE CONNECTOR:\nReference only for compatibility with the original control board layout.\nNo replacement keypad electronics are designed in this project."
+    (at 25.4 101.6 0)
+    (effects (font (size 1.35 1.35)) (justify left top))
+    (uuid "c3705207-1034-410b-aa1b-05745ae334f5")
+  )
+  (text "FIRMWARE/UI POLICY:\nLocal keypad behavior, if retained, must not bypass hardware lockouts.\nMQTT/Home Assistant commands remain advisory and cannot override any safety fault."
+    (at 25.4 127.0 0)
+    (effects (font (size 1.35 1.35)) (justify left top))
+    (uuid "c9f041c3-06fd-40fb-8acd-ae87f383f158")
   )
   (sheet_instances
     (path "/ba55cf46-9fdf-4a3a-aad6-4553ca5d6c42" (page "7"))

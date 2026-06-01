@@ -53,7 +53,7 @@ hierarchical_sheets:
   - file: sheets/icm_interface.kicad_sch
     purpose: TH relay output, TH/IND/VAL/24VAC isolated monitoring, relay feedback.
   - file: sheets/ui_remote.kicad_sch
-    purpose: Pool/Spa/Common remote dry contacts, local buttons, display, LEDs, buzzer.
+    purpose: Pool/Spa/Common external-control dry contacts only; keypad/display/buzzer design is out of scope.
 
 net_classes:
   - name: DEFAULT
@@ -117,21 +117,18 @@ connectors:
       1: SPA_LINE
       2: COMMON_LINE
       3: POOL_LINE
-  J6_MEMBRANE_UI:
-    notes: Manual Rev C Figure 24 J6 membrane-pad connector, pin count and final mapping still to verify from installed harness.
+  J6_MEMBRANE_REFERENCE:
+    notes: Manual Rev C Figure 24 J6 membrane-pad connector reference only; this project does not design the keypad, display, buzzer, or status LED assembly.
     pins:
-      1: BTN_POOL
-      2: BTN_SPA
-      3: BTN_OFF
-      4: BTN_UP
-      5: BTN_DOWN
-      6: BTN_RESET
-      7: UI_GND
-      8: DISPLAY_SDA
-      9: DISPLAY_SCL
-      10: +3V3_UI
-      11: BUZZER
-      12: STATUS_LED_DATA
+      1: OEM_MEMBRANE_PIN_1_VERIFY
+      2: OEM_MEMBRANE_PIN_2_VERIFY
+      3: OEM_MEMBRANE_PIN_3_VERIFY
+      4: OEM_MEMBRANE_PIN_4_VERIFY
+      5: OEM_MEMBRANE_PIN_5_VERIFY
+      6: OEM_MEMBRANE_PIN_6_VERIFY
+      7: OEM_MEMBRANE_PIN_7_VERIFY
+      8: OEM_MEMBRANE_PIN_8_VERIFY
+      9: OEM_MEMBRANE_PIN_9_VERIFY
 
 review_gates:
   before_schematic_capture:

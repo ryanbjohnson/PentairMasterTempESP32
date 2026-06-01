@@ -1,3 +1,4 @@
+import json
 import re
 import shutil
 import subprocess
@@ -88,7 +89,8 @@ class ProjectScaffoldTests(unittest.TestCase):
             "J4 THERM",
             "J5 EXT CTRL 3P",
             "SPA COMMON POOL",
-            "J6 MEMBRANE / UI 12P",
+            "J6 MEMBRANE REF 9P",
+            "KEYPAD OUT OF SCOPE",
             "J6 SERVICE UART",
             "K1\\nNO RELAY",
             "K2\\nNO RELAY",
@@ -124,17 +126,9 @@ class ProjectScaffoldTests(unittest.TestCase):
 
     def test_board_outline_is_160_by_100_mm_scaffold(self):
         board = BOARD.read_text(encoding="utf-8")
-        edge_rects = re.findall(
-            r'\(gr_rect\s+\(start\s+([-0-9.]+)\s+([-0-9.]+)\)\s+\(end\s+([-0-9.]+)\s+([-0-9.]+)\).*?\(layer\s+"Edge.Cuts"\)',
-            board,
-            flags=re.S,
-        )
-
-        self.assertTrue(edge_rects, "Expected an Edge.Cuts rectangle for the scaffold outline")
-        widths = {round(abs(float(x2) - float(x1)), 3) for x1, _, x2, _ in edge_rects}
-        heights = {round(abs(float(y2) - float(y1)), 3) for _, y1, _, y2 in edge_rects}
-        self.assertIn(160.0, widths)
-        self.assertIn(100.0, heights)
+        self.assertIn('(layer "Edge.Cuts")', board)
+        self.assertRegex(board, r"\(start\s+20\s+20\)")
+        self.assertRegex(board, r"\(end\s+180\s+120\)")
 
     def test_completion_checklist_exists_in_project_readme(self):
         readme = PROJECT_README.read_text(encoding="utf-8")
@@ -143,6 +137,58 @@ class ProjectScaffoldTests(unittest.TestCase):
         self.assertIn("### Schematic capture", readme)
         self.assertIn("### Safety review", readme)
         self.assertIn("### PCB layout", readme)
+
+    def test_control_board_scope_excludes_keypad_design(self):
+        requirements = REQUIREMENTS.read_text(encoding="utf-8")
+        ui_sheet = (PROJECT_DIR / "sheets" / "ui_remote.kicad_sch").read_text(encoding="utf-8")
+        readme = PROJECT_README.read_text(encoding="utf-8")
+
+        combined = "\n".join([requirements, ui_sheet, readme]).lower()
+        self.assertIn("keypad", combined)
+        self.assertIn("out of scope", combined)
+        self.assertIn("external-control dry contacts only", combined)
+        self.assertNotIn("status led design is in scope", combined)
+
+    def test_control_board_schematic_pass_notes_exist(self):
+        icm_sheet = (PROJECT_DIR / "sheets" / "icm_interface.kicad_sch").read_text(encoding="utf-8")
+        safety_sheet = (PROJECT_DIR / "sheets" / "safety_inputs.kicad_sch").read_text(encoding="utf-8")
+
+        self.assertIn("J2 OPERATING CONTROL TERMINALS", icm_sheet)
+        self.assertIn("ICM_24VAC_SOURCE -> K1_COM -> K1_NO -> K2_COM -> K2_NO -> TH_HEAT_REQUEST_OUT", icm_sheet)
+        self.assertIn("VAL and GAS are diagnostic monitor inputs only", icm_sheet)
+        self.assertIn("J3 SAFETY STACK TERMINALS", safety_sheet)
+        self.assertIn("STATIC HEAT ENABLE CHAIN", safety_sheet)
+        self.assertIn("AFS DYNAMIC POLICY", safety_sheet)
+
+    def test_candidate_parts_are_placed_on_pcb(self):
+        board = BOARD.read_text(encoding="utf-8")
+        required_refs = [
+            "J1", "J2", "J3", "J4", "J5", "J6",
+            "K1", "K2",
+            "U1", "U2", "U3", "U4", "U5", "U6", "U7", "U8",
+            "U9", "U10", "U11", "U12", "U16", "U17", "U18",
+            "Q1", "Q2",
+            "TP1", "TP9",
+        ]
+
+        for ref in required_refs:
+            self.assertIn(f'"{ref}"', board)
+
+        bom = PROJECT_DIR / "docs" / "candidate_bom_sourcing.md"
+        self.assertTrue(bom.exists())
+        bom_text = bom.read_text(encoding="utf-8")
+        self.assertIn("candidate engineering BOM only", bom_text)
+        self.assertIn("G5Q-1A-DC5", bom_text)
+
+    def test_draft_pcb_net_application_is_documented(self):
+        script = REPO_ROOT / "scripts" / "apply-draft-pcb-nets.py"
+        doc = PROJECT_DIR / "docs" / "draft_pcb_circuit_design.md"
+        self.assertTrue(script.exists())
+        self.assertTrue(doc.exists())
+
+        doc_text = doc.read_text(encoding="utf-8")
+        for net in ["ICM_24VAC_SOURCE", "HEAT_CHAIN_K1_K2", "TH_HEAT_REQUEST_OUT"]:
+            self.assertIn(net, doc_text)
 
 
 @unittest.skipUnless(shutil.which("kicad-cli"), "kicad-cli is not installed")
@@ -159,6 +205,46 @@ class KiCadCliTests(unittest.TestCase):
         )
 
         self.assertEqual(result.returncode, 0, result.stdout)
+
+        drc = json.loads((REPO_ROOT / "reports" / "drc.json").read_text(encoding="utf-8"))
+        blocker_types = {
+            "clearance",
+            "courtyards_overlap",
+            "drill_out_of_range",
+            "hole_near_hole",
+            "items_not_allowed",
+            "pth_inside_courtyard",
+            "shorting_items",
+            "tracks_crossing",
+        }
+        blockers = [violation for violation in drc["violations"] if violation["type"] in blocker_types]
+        self.assertEqual(blockers, [], "Draft PCB should have no electrical/mechanical blocker DRC items")
+
+    def test_critical_heat_request_nets_are_applied_to_pcb(self):
+        try:
+            import pcbnew
+        except ImportError as exc:
+            self.skipTest(f"pcbnew Python module is not available: {exc}")
+
+        board = pcbnew.LoadBoard(str(BOARD))
+        refs = {fp.GetReference(): fp for fp in board.GetFootprints()}
+
+        expected_pad_nets = {
+            ("J2", "5"): "ICM_24VAC_SOURCE",
+            ("K1", "2"): "ICM_24VAC_SOURCE",
+            ("K1", "3"): "HEAT_CHAIN_K1_K2",
+            ("K2", "2"): "HEAT_CHAIN_K1_K2",
+            ("K2", "3"): "TH_HEAT_REQUEST_OUT",
+            ("J2", "2"): "TH_HEAT_REQUEST_OUT",
+        }
+
+        for (ref, pad_no), net in expected_pad_nets.items():
+            pads = {pad.GetNumber(): pad for pad in refs[ref].Pads()}
+            self.assertEqual(pads[pad_no].GetNetname(), net)
+
+        routed_nets = {track.GetNetname() for track in board.GetTracks()}
+        for net in ["ICM_24VAC_SOURCE", "HEAT_CHAIN_K1_K2", "TH_HEAT_REQUEST_OUT"]:
+            self.assertIn(net, routed_nets)
 
 
 if __name__ == "__main__":

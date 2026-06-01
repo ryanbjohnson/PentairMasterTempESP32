@@ -42,6 +42,8 @@ Use this as the live gate list for moving from scaffold to a reviewable PCB pack
 - [x] Four-layer board scaffold exists with preliminary 160 mm x 100 mm outline and functional placement zones.
 - [x] PCB floorplan v0 exists with connector, relay, power, ESP32, analog, and test-pad placement envelopes.
 - [x] Local MasterTemp 125 Rev C PDF electrical pages were reviewed and summarized in `docs/mastertemp125_rev_c_manual_review.md`.
+- [x] Candidate sourced BOM and first-pass footprint placement exist for control-board circuitry.
+- [x] PCB-side draft nets and first-pass relay contact-chain routing are applied and documented.
 - [x] Headless KiCad `ERC` and `DRC` automation runs in the dev container.
 - [x] Repository-level scaffold tests exist under `tests/`.
 - [ ] KiCad project metadata has been opened and normalized once in the target GUI KiCad version.
@@ -65,7 +67,7 @@ Use this as the live gate list for moving from scaffold to a reviewable PCB pack
 - [ ] `esp32_supervisor`: ESP32 module, programming header, watchdog, reset supervisor, I2C, relay-enable logic.
 - [ ] `safety_inputs`: Fireman's Switch, PS, HLS, ES1, AGS static chain, AFS dynamic monitor, dry-contact isolated sense.
 - [ ] `thermistor_sfs`: thermistor divider, SFS measurement path, ADC, protection, hardware window comparators.
-- [ ] `ui_remote`: Pool/Common/Spa dry-contact sense, local buttons, display header, buzzer, status LED.
+- [ ] `ui_remote`: Pool/Common/Spa external-control dry-contact sense only; keypad/display/buzzer/status LED design remains out of scope.
 - [ ] ERC has zero unreviewed violations after each sheet is captured.
 - [ ] All symbols have footprints assigned or documented as no-fit/test-only.
 
@@ -83,14 +85,16 @@ Use this as the live gate list for moving from scaffold to a reviewable PCB pack
 
 - [x] First-pass placement envelopes follow the zone plan in `rules/layout_constraints.md`.
 - [x] Draft connector envelopes follow Rev C Figure 24 operating-control groups.
-- [ ] Real footprints are placed according to schematic capture and selected part numbers.
+- [x] Candidate footprints are placed according to first-pass sourced part numbers.
+- [x] Critical relay contact-chain PCB nets are named and first-pass routed.
+- [ ] Footprints are synchronized to final schematic symbols and netlist.
 - [ ] ESP32 antenna keepout has no copper, components, or nearby metal-obstructing placement.
 - [ ] Relay contact and 24 VAC control paths use assigned net classes and visible separation from logic.
 - [ ] Field-side optocoupler pins face connectors and logic-side pins face MCU/expander circuitry.
 - [ ] Thermistor/SFS analog traces avoid relay coils, AC sense, ESD discharge paths, and buck switch nodes.
 - [ ] Test pads exist for `VRAW`, `+5V`, `+3V3`, watchdog, safety chain, relay coils, TH feedback, and VAL sense.
 - [ ] Silkscreen warnings are present and readable.
-- [ ] DRC has zero unreviewed violations and schematic parity passes.
+- [ ] DRC has zero unreviewed violations and schematic parity passes. Current draft has only silkscreen DRC warnings plus expected unrouted/parity items from incomplete schematic capture.
 
 ### Fabrication and validation
 

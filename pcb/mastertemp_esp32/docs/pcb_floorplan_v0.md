@@ -8,7 +8,8 @@ This is the first physical design pass for the MasterTemp ESP32 interface board.
 
 - `J1 POWER` sits at the upper-left service edge for 24 VAC Class II input.
 - `J2 OPERATING CONTROL` follows the Rev C manual operating-control terminal organization: `VAL`, `TH`, `IND`, `GND`, `24VAC`, `24VAC`, `FS`.
-- `J3 SAFETY STACK`, `J4 THERMISTOR`, `J5 EXT CTRL`, and `J6 MEMBRANE / UI` mirror the major operating-control connector groups shown in Rev C Figure 24.
+- `J3 SAFETY STACK`, `J4 THERMISTOR`, `J5 EXT CTRL`, and `J6 MEMBRANE REF` mirror the major operating-control connector groups shown in Rev C Figure 24.
+- `J6` is a reference/compatibility envelope only; keypad, membrane-pad, display, buzzer, and status-LED electronics are not part of this design scope.
 - `K1` and `K2` are placed in series between the ICM connector and the logic/control regions.
 - AC optocoupler sensing straddles the left-side field/logic boundary.
 - The 100 V buck area is kept center-left with room for a compact switch loop.

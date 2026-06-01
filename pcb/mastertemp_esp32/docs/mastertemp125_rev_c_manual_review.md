@@ -25,7 +25,7 @@ PDF metadata:
 - The operating-control top terminal order shown in Figure 24 is `VAL`, `TH`, `IND`, `GND`, `24VAC`, plus a separate `24VAC` / `FS` Fireman's Switch block.
 - The operating-control left safety stack shown in Figure 24 is `PS`, `HLS`, `ES1`, `AFS`, `AGS`, `SFS`, `GAS`.
 - The operating-control has a separate thermistor connector pair near the top-right of the board.
-- The operating-control has a right-side `J6` membrane-pad connector.
+- The operating-control has a right-side `J6` membrane-pad connector. This project may reference that connector for control-board compatibility, but does not design the keypad/membrane-pad assembly.
 - The three-wire external-control interface shown in Figure 24 is `Spa Line`, `Common Line`, `Pool Line`.
 - The ignition-control module terminal row shown in Figure 24/Figure 25 includes `S1/240`, `S1/120`, `L1`, `L2`, `S2`, `TH`, `IND`, `VAL`, and `GND`.
 - The ladder diagram shows the OEM ignition-control module owns ignition, blower, gas-valve, `TH`, `IND`, `VAL`, and `GND` sequencing.
