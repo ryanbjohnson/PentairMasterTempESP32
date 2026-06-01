@@ -12,4 +12,4 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Run repository tests
-        run: ./scripts/run-tests.sh
+        run: bash ./scripts/run-tests.sh
