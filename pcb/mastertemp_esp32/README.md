@@ -72,7 +72,7 @@ Use this as the live gate list for moving from scaffold to a reviewable PCB pack
 - [ ] `icm_interface`: manual-aligned operating-control connector, dual series normally-open relay contacts, coil drivers, flyback, AC opto sense, TH feedback, ICM terminal reference.
 - [ ] `esp32_supervisor`: ESP32 module, programming header, watchdog, reset supervisor, I2C, relay-enable logic.
 - [ ] `safety_inputs`: Fireman's Switch, PS, HLS, ES1, AGS static chain, AFS dynamic monitor, dry-contact isolated sense.
-- [ ] `thermistor_sfs`: thermistor divider, SFS measurement path, ADC, protection, hardware window comparators.
+- [ ] `thermistor_sfs`: first-pass ADC/window-comparator architecture captured; final thermistor/SFS values and thresholds remain field-open.
 - [ ] `ui_remote`: Pool/Common/Spa external-control dry-contact sense only; keypad/display/buzzer/status LED design remains out of scope.
 - [ ] ERC has zero unreviewed violations after each sheet is captured.
 - [ ] All symbols have footprints assigned or documented as no-fit/test-only.
