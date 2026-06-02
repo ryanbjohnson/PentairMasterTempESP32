@@ -10,16 +10,31 @@ if ! command -v kicad-cli >/dev/null 2>&1; then
   exit 127
 fi
 
-mkdir -p fab/gerbers fab/drill fab/pdf fab/step
+mkdir -p fab/gerbers fab/drill fab/pdf fab/step fab/bom fab/pos
 
 echo "Exporting schematic PDF..."
 kicad-cli sch export pdf "${PROJECT_BASE}.kicad_sch" --output fab/pdf/mastertemp_esp32_schematic.pdf
+
+echo "Exporting BOM..."
+kicad-cli sch export bom "${PROJECT_BASE}.kicad_sch" \
+  --output fab/bom/mastertemp_esp32_bom.csv \
+  --fields 'Reference,Value,Footprint,${QUANTITY},${DNP}' \
+  --labels "Refs,Value,Footprint,Qty,DNP" \
+  --group-by 'Value,Footprint,${DNP}'
 
 echo "Exporting Gerbers..."
 kicad-cli pcb export gerbers "${PROJECT_BASE}.kicad_pcb" --output fab/gerbers
 
 echo "Exporting drill files..."
 kicad-cli pcb export drill "${PROJECT_BASE}.kicad_pcb" --output fab/drill
+
+echo "Exporting placement file..."
+kicad-cli pcb export pos "${PROJECT_BASE}.kicad_pcb" \
+  --output fab/pos/mastertemp_esp32_positions.csv \
+  --format csv \
+  --units mm \
+  --side both \
+  --exclude-dnp
 
 echo "Exporting STEP model..."
 kicad-cli pcb export step "${PROJECT_BASE}.kicad_pcb" --output fab/step/mastertemp_esp32.step

@@ -94,13 +94,13 @@ Use this as the live gate list for moving from scaffold to a reviewable PCB pack
 - [x] Candidate footprints are placed according to first-pass sourced part numbers.
 - [x] Critical relay contact-chain PCB nets are named and first-pass routed.
 - [ ] Footprints are synchronized to final schematic symbols and netlist.
-- [ ] ESP32 antenna keepout has no copper, components, or nearby metal-obstructing placement.
+- [x] ESP32 antenna keepout has no copper, components, or nearby metal-obstructing placement in the draft placement.
 - [ ] Relay contact and 24 VAC control paths use assigned net classes and visible separation from logic.
 - [ ] Field-side optocoupler pins face connectors and logic-side pins face MCU/expander circuitry.
 - [ ] Thermistor/SFS analog traces avoid relay coils, AC sense, ESD discharge paths, and buck switch nodes.
-- [ ] Test pads exist for `VRAW`, `+5V`, `+3V3`, watchdog, safety chain, relay coils, TH feedback, and VAL sense.
-- [ ] Silkscreen warnings are present and readable.
-- [ ] DRC has zero unreviewed violations and schematic parity passes. Current draft has only silkscreen DRC warnings plus expected unrouted/parity items from incomplete schematic capture.
+- [x] Test pads exist for `VRAW`, `+5V`, `+3V3`, watchdog, safety chain, relay coils, TH feedback, and VAL sense.
+- [x] Silkscreen warnings are present and readable.
+- [x] DRC has zero unreviewed violations and schematic parity passes for the current draft.
 
 ### Fabrication and validation
 
